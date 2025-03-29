@@ -3,6 +3,8 @@ Hướng dẫn cấu hình Gin  với wire(DI)
 
 1. Cài đặt 
 
+    Với GIN thì đọc và làm theo trang chủ. chắc chỉ mất vài phút nến sẽ ko  đều cập tại đây xem như bạn phải tự hiểu.
+
     ```bash
     go install github.com/google/wire/cmd/wire@latest
     ```
@@ -72,4 +74,24 @@ Hướng dẫn cấu hình Gin  với wire(DI)
 
 
 
+3. Rồi bạn có thể dùng
+
+    đây  là file router.go
+
+```go 
+    userController := di_wire.InitUserRouterHandler() //  Init DI
+
+	v1 := r.Group("/v1")
+	{
+		v1.GET("/user", userController.GetUser) // 🛠 Dependency Injection
+	}
+```
+
+ - giờ   thì dùng thôi. Bạn có thắc mắc là nó khác gì nếu tự viết bình thường thì struct cũng xài đc?
+    - Câu trả lời là khác hắn. Nếu là newbie thì mình sẽ giải thích ở đây. Nếu không dùng DI ta phải new theo cú pháp bên  dưới đây
     
+    ```
+        userController := controller.NewUserController().GetUser
+    ```
+
+    - Nó dài loằng ngoằng. Còn cú pháp trên ta chỉ cần  init 1 thằng kia vào là xài. cóc cần phải biết nó từ đâu đến. Xong. chỉ có vậy thôi.
