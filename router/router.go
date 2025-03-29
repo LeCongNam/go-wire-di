@@ -1,7 +1,7 @@
 package router
 
 import (
-	di_wire "test/di"
+	userrouter "test/router/user_router"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,12 +9,7 @@ import (
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 
-	userController := di_wire.InitUserRouterHandler()
-
-	v1 := r.Group("/v1")
-	{
-		v1.GET("/user", userController.GetUser) // 🛠 Dependency Injection
-	}
+	userrouter.UserRouter(r)
 
 	return r
 

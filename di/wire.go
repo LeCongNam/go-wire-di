@@ -12,7 +12,7 @@ import (
 	"github.com/google/wire"
 )
 
-func InitUserRouterHandler() *controllers.UserController {
+func InitUserControllerHandler() *controllers.UserController {
 	panic(wire.Build(
 		repo.NewUserRepo,
 		services.NewUserService,
